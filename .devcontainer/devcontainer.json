@@ -8,7 +8,8 @@
 		"vscode": {
 			"extensions": [
 				"TeamsDevApp.ms-teams-vscode-extension",
-				"ms-vscode.vscode-node-azure-pack"
+				"ms-vscode.vscode-node-azure-pack",
+				"redhat.vscode-yaml"
 			]
 		}
 	},
