@@ -9,7 +9,8 @@
 			"extensions": [
 				"TeamsDevApp.ms-teams-vscode-extension",
 				"ms-vscode.vscode-node-azure-pack",
-				"redhat.vscode-yaml"
+				"redhat.vscode-yaml",
+				"TeamsDevApp.vscode-adaptive-cards"
 			]
 		}
 	},
