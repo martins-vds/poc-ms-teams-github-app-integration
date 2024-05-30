@@ -13,7 +13,15 @@
 				"TeamsDevApp.vscode-adaptive-cards",
 				"ms-azuretools.vscode-bicep",
 				"ms-dotnettools.vscode-dotnet-runtime"
-			]
+			],
+			"settings": {
+				"dotnetAcquisitionExtension.existingDotnetPath": [
+					{
+						"extensionId": "ms-azuretools.vscode-bicep",
+						"path": "/usr/share/dotnet/dotnet"
+					}
+				]
+			}
 		}
 	},
 	"features": {
