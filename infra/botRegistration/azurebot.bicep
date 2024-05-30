@@ -11,6 +11,11 @@ param botServiceSku string = 'F0'
 param botAadAppClientId string
 param botAppDomain string
 
+param githubConnectionName string
+param githubClientId string
+@secure()
+param githubClientSecret string
+
 // Register your web service as a bot with the Bot Framework
 resource botService 'Microsoft.BotService/botServices@2021-03-01' = {
   kind: 'azurebot'
@@ -33,5 +38,18 @@ resource botServiceMsTeamsChannel 'Microsoft.BotService/botServices/channels@202
   name: 'MsTeamsChannel'
   properties: {
     channelName: 'MsTeamsChannel'
+  }
+}
+
+resource botServiceOauthConfig 'Microsoft.BotService/botServices/connections@2022-09-15' = {
+  parent: botService
+  location: 'global'
+  name: githubConnectionName
+  properties: {
+    name: githubConnectionName
+    serviceProviderDisplayName: 'GitHub'
+    serviceProviderId: 'd05eaacf-1593-4603-9c6c-d4d8fffa46cb'
+    clientId: githubClientId
+    clientSecret: githubClientSecret
   }
 }

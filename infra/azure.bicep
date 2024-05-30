@@ -10,6 +10,11 @@ param botAadAppClientId string
 @description('Required by Bot Framework package in your bot project')
 param botAadAppClientSecret string
 
+param githubConnectionName string
+param githubClientId string
+@secure()
+param githubClientSecret string
+
 param webAppSKU string
 
 @maxLength(42)
@@ -17,11 +22,23 @@ param botDisplayName string
 
 param serverfarmsName string = resourceBaseName
 param webAppName string = resourceBaseName
+param appInsightsName string = resourceBaseName
 param location string = resourceGroup().location
+
+
+
+resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
+  location: location
+  name: appInsightsName
+  kind: 'web'
+  properties: {
+    Application_Type: 'web'
+  }
+}
 
 // Compute resources for your Web App
 resource serverfarm 'Microsoft.Web/serverfarms@2021-02-01' = {
-  kind: 'app'
+  kind: 'linux'
   location: location
   name: serverfarmsName
   sku: {
@@ -31,7 +48,7 @@ resource serverfarm 'Microsoft.Web/serverfarms@2021-02-01' = {
 
 // Web App that hosts your bot
 resource webApp 'Microsoft.Web/sites@2021-02-01' = {
-  kind: 'app'
+  kind: 'linux'
   location: location
   name: webAppName
   properties: {
@@ -39,6 +56,7 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
     httpsOnly: true
     siteConfig: {
       alwaysOn: true
+      linuxFxVersion: 'NODE|18-lts'
       appSettings: [
         {
           name: 'WEBSITE_RUN_FROM_PACKAGE'
@@ -60,6 +78,10 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
           name: 'BOT_PASSWORD'
           value: botAadAppClientSecret
         }
+        {
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: appInsigths.properties.
+        }
       ]
       ftpsState: 'FtpsOnly'
     }
@@ -74,6 +96,9 @@ module azureBotRegistration './botRegistration/azurebot.bicep' = {
     botAadAppClientId: botAadAppClientId
     botAppDomain: webApp.properties.defaultHostName
     botDisplayName: botDisplayName
+    githubConnectionName: githubConnectionName 
+    githubClientId: githubClientId
+    githubClientSecret: githubClientSecret
   }
 }
 

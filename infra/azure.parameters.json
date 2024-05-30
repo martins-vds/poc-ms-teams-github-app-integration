@@ -16,6 +16,15 @@
       },
       "botDisplayName": {
         "value": "MyGitHubApp"
+      },
+      "githubConnectionName":{
+        "value": "${{CONNECTION_NAME}}"      
+      },
+      "githubClientId":{ 
+        "value": "${{GITHUB_APP_CLIENT_ID}}"
+      },
+      "githubClientSecret":{ 
+        "value": "${{GITHUB_APP_CLIENT_SECRET}}"
       }
     }
   }
