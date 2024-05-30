@@ -1,7 +1,7 @@
 {
-    "name": "mygithubteamsapp",
+    "name": "mygithubapp",
     "version": "1.0.0",
-    "description": "Microsoft Teams Toolkit Command and Response Bot Sample",
+    "description": "Microsoft Teams Toolkit Notification Bot Sample (Restify)",
     "engines": {
         "node": "16 || 18"
     },
@@ -23,6 +23,7 @@
         "url": "https://github.com"
     },
     "dependencies": {
+        "@microsoft/adaptivecards-tools": "^1.0.0",
         "@microsoft/teamsfx": "^2.3.1",
         "botbuilder": "^4.20.0",
         "restify": "^10.0.0"

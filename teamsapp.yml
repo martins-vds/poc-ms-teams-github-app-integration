@@ -11,7 +11,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: MyGithubTeamsApp${{APP_NAME_SUFFIX}}
+      name: MyGitHubApp${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile:
@@ -21,7 +21,7 @@ provision:
   - uses: aadApp/create
     with:
       # The Microsoft Entra application's display name
-      name: MyGithubTeamsApp${{APP_NAME_SUFFIX}}
+      name: MyGitHubApp${{APP_NAME_SUFFIX}}
       generateClientSecret: true
       signInAudience: AzureADMultipleOrgs
     writeToEnvironmentFile:
@@ -143,4 +143,4 @@ publish:
     # the specified environment variable(s).
     writeToEnvironmentFile:
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-projectId: 350cb8e2-d72c-4bb2-8398-eacb6a496e86
+projectId: e08c308e-28f5-4de8-b479-55b6e7c540f6

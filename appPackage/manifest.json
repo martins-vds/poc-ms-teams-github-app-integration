@@ -15,39 +15,24 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "MyGithubTeamsApp${{APP_NAME_SUFFIX}}",
-        "full": "Full name for MyGithubTeamsApp"
+        "short": "MyGitHubApp${{APP_NAME_SUFFIX}}",
+        "full": "Full name for MyGitHubApp"
     },
     "description": {
-        "short": "Short description of MyGithubTeamsApp",
-        "full": "Full description of MyGithubTeamsApp"
+        "short": "Short description of MyGitHubApp",
+        "full": "Full description of MyGitHubApp"
     },
     "accentColor": "#FFFFFF",
     "bots": [
         {
-            "botId": "${{BOT_ID}}",
+            "botId": "${{AAD_APP_CLIENT_ID}}",
             "scopes": [
                 "personal",
                 "team",
                 "groupchat"
             ],
             "supportsFiles": false,
-            "isNotificationOnly": false,
-            "commandLists": [
-                {
-                    "scopes": [
-                        "personal",
-                        "team",
-                        "groupchat"
-                    ],
-                    "commands": [
-                        {
-                            "title": "helloWorld",
-                            "description": "A helloworld command to send a welcome message"
-                        }
-                    ]
-                }
-            ]
+            "isNotificationOnly": false
         }
     ],
     "composeExtensions": [],
@@ -57,5 +42,12 @@
         "identity",
         "messageTeamMembers"
     ],
-    "validDomains": []
+    "validDomains": [
+        "token.botframework.com",
+        "${{BOT_DOMAIN}}"
+      ],
+      "webApplicationInfo": {
+        "id": "${{AAD_APP_CLIENT_ID}}",
+        "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
+      }
 }
