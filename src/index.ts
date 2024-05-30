@@ -49,7 +49,7 @@ server.post(
           AdaptiveCards.declare<NotificationData>(notificationTemplate).render({
             title: "New Event Occurred!",
             appName: "Contoso App Notification",
-            description: `This is a sample http-triggered notification to ${target.type}`,
+            description: req.body,
             notificationUrl: "https://aka.ms/teamsfx-notification-new",
           })
         );
@@ -151,8 +151,6 @@ const conversationState = new ConversationState(memoryStorage);
 const userState = new UserState(memoryStorage);
 
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(authConfig);
-
-console.log(authConfig);
 
 const tokenExchangeMiddleware = new TeamsSSOTokenExchangeMiddleware(memoryStorage, config.connectionName);
 

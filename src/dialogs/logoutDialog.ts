@@ -1,4 +1,4 @@
-import { ActivityTypes, CloudAdapter, TurnContext } from 'botbuilder';
+import { ActivityTypes, CloudAdapter } from 'botbuilder';
 import { ComponentDialog, DialogContext } from 'botbuilder-dialogs';
 
 export class LogoutDialog extends ComponentDialog {

@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import { ConversationState, UserState, TurnContext, ActivityTypes } from 'botbuilder';
-import { DialogState } from 'botbuilder-dialogs';
+import { ConversationState, UserState, TurnContext } from 'botbuilder';
 import { DialogBot } from './dialogBot';
 import { MainDialog } from '../dialogs/mainDialog';
 

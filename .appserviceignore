@@ -26,3 +26,6 @@ teamsapp.*.yml
 /appPackage/
 /infra/
 /devTools/
+/.devcontainer/
+.env
+aad.manifest.json

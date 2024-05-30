@@ -16,6 +16,8 @@ param githubClientId string
 @secure()
 param githubClientSecret string
 
+param appInsightsInstrumentationKey string
+
 // Register your web service as a bot with the Bot Framework
 resource botService 'Microsoft.BotService/botServices@2021-03-01' = {
   kind: 'azurebot'
@@ -25,6 +27,7 @@ resource botService 'Microsoft.BotService/botServices@2021-03-01' = {
     displayName: botDisplayName
     endpoint: 'https://${botAppDomain}/api/messages'
     msaAppId: botAadAppClientId
+    developerAppInsightKey: appInsightsInstrumentationKey
   }
   sku: {
     name: botServiceSku

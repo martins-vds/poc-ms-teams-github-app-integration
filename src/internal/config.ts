@@ -7,6 +7,8 @@ const config = {
   tenantId: process.env.AAD_APP_TENANT_ID,
   clientSecret: process.env.AAD_APP_CLIENT_SECRET,
   connectionName: process.env.CONNECTION_NAME,
+  blobConnectionString: process.env.BLOB_CONNECTION_STRING,
+  blobContainerName: process.env.BLOB_CONTAINER_NAME,
 };
 
 export default config;

@@ -6,7 +6,7 @@ import {
   MessageBuilder,
 } from "@microsoft/teamsfx";
 import helloWorldCard from "../adaptiveCards/helloworldCommand.json";
-import { CardData, NotificationData } from "../cardModels";
+import { CardData } from "../cardModels";
 
 /**
  * The `HelloWorldCommandHandler` registers a pattern with the `TeamsFxBotCommandHandler` and responds
