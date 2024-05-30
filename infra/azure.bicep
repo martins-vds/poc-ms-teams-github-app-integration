@@ -80,7 +80,7 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
         }
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
-          value: appInsigths.properties.
+          value: appInsigths.
         }
       ]
       ftpsState: 'FtpsOnly'
