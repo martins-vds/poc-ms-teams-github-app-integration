@@ -5,9 +5,7 @@ import { notificationApp } from "./internal/initialize";
 import { NotificationData } from "./cardModels";
 import { TeamsBot } from "./bots/teamsBot";
 import { MainDialog } from "./dialogs/mainDialog";
-import { CloudAdapter, ConfigurationBotFrameworkAuthentication, ConversationState, MemoryStorage, TeamsSSOTokenExchangeMiddleware, UserState } from "botbuilder";
-import { authConfig } from "./authConfig";
-import config from "./internal/config";
+import { ConversationState, MemoryStorage, UserState } from "botbuilder";
 
 // Create HTTP server.
 const server = restify.createServer();
@@ -49,7 +47,7 @@ server.post(
           AdaptiveCards.declare<NotificationData>(notificationTemplate).render({
             title: "New Event Occurred!",
             appName: "Contoso App Notification",
-            description: req.body,
+            description: JSON.stringify(req.body),
             notificationUrl: "https://aka.ms/teamsfx-notification-new",
           })
         );
@@ -145,38 +143,8 @@ server.post(
 
 
 const memoryStorage = new MemoryStorage();
-
-// Create conversation and user state with in-memory storage provider.
 const conversationState = new ConversationState(memoryStorage);
 const userState = new UserState(memoryStorage);
-
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(authConfig);
-
-const tokenExchangeMiddleware = new TeamsSSOTokenExchangeMiddleware(memoryStorage, config.connectionName);
-
-const adapter = new CloudAdapter(botFrameworkAuthentication);
-
-adapter.use(tokenExchangeMiddleware);
-adapter.onTurnError = async (context, error) => {
-  const errorMsg = error.message
-      ? error.message
-      : `Oops. Something went wrong!`;
-  // This check writes out errors to console log .vs. app insights.
-  // NOTE: In production environment, you should consider logging this to Azure
-  //       application insights.
-  console.error(`\n [onTurnError] unhandled error: ${error}`);
-
-  // Clear out state
-  await conversationState.delete(context);
-  // Send a message to the user
-  await context.sendActivity(errorMsg);
-
-  // Note: Since this Messaging Extension does not have the messageTeamMembers permission
-  // in the manifest, the bot will not be allowed to message users.
-
-  // Uncomment below commented line for local debugging.
-  // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${errorMsg}`);
-};
 
 // Create the main dialog.
 const dialog = new MainDialog();
@@ -184,6 +152,6 @@ const teamsBot = new TeamsBot(conversationState, userState, dialog);
 
 server.post("/api/messages", async (req, res) => {
   await notificationApp.requestHandler(req, res, async (context) => {
-    await adapter.process(req, res, (context) => teamsBot.run(context));
+    await teamsBot.run(context)
   });
 });
